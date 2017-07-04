@@ -15,6 +15,11 @@ module.exports = {
         loader: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(mp3|ogg|flac|png|svg)$/,
+        loader: 'file-loader',
+        options: { name: '[name].[md5:hash:hex:8].[ext]' },
+      },
     ],
   },
   resolve: {
