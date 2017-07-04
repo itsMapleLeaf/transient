@@ -1,6 +1,5 @@
 import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
-import { Chart } from './chart'
 import { viewHeight, viewWidth } from './constants'
 import { GameState } from './game'
 import { degreesToRadians } from './util'
