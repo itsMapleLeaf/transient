@@ -1,8 +1,9 @@
 import { Game } from './game'
-import { MainMenu } from './states/main-menu'
+import { Gameplay } from './states/gameplay'
+// import { MainMenu } from './states/main-menu'
 
 const game = new Game()
-game.setState(new MainMenu(game))
+game.setState(new Gameplay(game))
 game.run()
 
 const viewRoot = document.querySelector('#game')
