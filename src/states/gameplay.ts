@@ -1,8 +1,8 @@
 import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
-import { viewHeight, viewWidth } from './constants'
-import { GameState } from './game'
-import { degreesToRadians } from './util'
+import { viewHeight, viewWidth } from '../constants'
+import { GameState } from '../game'
+import { degreesToRadians } from '../lib/util'
 
 function createRectObject(width: number, height: number) {
   const sprite = new pixi.Graphics()
@@ -29,7 +29,7 @@ export class Gameplay extends GameState {
   playing = false
 
   music = new Howl({
-    src: [require('./moonlight.flac')],
+    src: [require('../assets/moonlight.flac')],
     // autoplay: true,
     volume: 0.5,
     onload: () => {

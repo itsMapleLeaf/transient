@@ -1,5 +1,5 @@
 import { Game } from './game'
-import { MainMenu } from './main-menu'
+import { MainMenu } from './states/main-menu'
 
 const game = new Game()
 game.setState(new MainMenu(game))

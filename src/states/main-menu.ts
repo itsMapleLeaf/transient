@@ -1,6 +1,6 @@
 import * as pixi from 'pixi.js'
-import { viewHeight, viewWidth } from './constants'
-import { GameState } from './game'
+import { viewHeight, viewWidth } from '../constants'
+import { GameState } from '../game'
 import { SongSelect } from './song-select'
 
 export class MainMenu extends GameState {

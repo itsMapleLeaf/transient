@@ -1,5 +1,5 @@
 import * as pixi from 'pixi.js'
-import { GameState } from './game'
+import { GameState } from '../game'
 import { Gameplay } from './gameplay'
 
 export class SongSelect extends GameState {
