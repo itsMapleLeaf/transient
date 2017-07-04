@@ -2,7 +2,7 @@ import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
 import { viewHeight, viewWidth } from '../constants'
 import { GameState } from '../game'
-import { degreesToRadians } from '../lib/util'
+import { degreesToRadians, randomBetween } from '../lib/util'
 
 function createRectObject(width: number, height: number) {
   const sprite = new pixi.Graphics()
@@ -16,7 +16,7 @@ class NoteObject {
   sprite = createRectObject(70, 70)
 
   constructor() {
-    this.sprite.position.set(Math.random() * viewWidth, 100)
+    this.sprite.position.set(randomBetween(100, viewWidth - 100), 100)
     this.sprite.pivot.set(this.sprite.width / 2, this.sprite.height / 2)
     this.sprite.rotation += degreesToRadians(45)
   }

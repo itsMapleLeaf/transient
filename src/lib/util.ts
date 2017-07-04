@@ -17,3 +17,7 @@ export function degreesToRadians(degrees: number) {
 export function clamp(n: number, min: number, max: number) {
   return n > max ? max : n < min ? min : n
 }
+
+export function randomBetween(min: number, max: number) {
+  return Math.random() * (max - min) + min
+}
