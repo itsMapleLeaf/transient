@@ -16,13 +16,14 @@ class NoteObject {
   sprite = createRectObject(70, 70)
 
   constructor() {
-    this.sprite.position.set(100, 100)
+    this.sprite.position.set(Math.random() * viewWidth, 100)
     this.sprite.pivot.set(this.sprite.width / 2, this.sprite.height / 2)
     this.sprite.rotation += degreesToRadians(45)
   }
 }
 
 export class Gameplay extends GameState {
+  notes = new pixi.Container()
   receptor = createRectObject(viewWidth, 10)
   fpsText = new pixi.Text('0')
   songTime = 0
@@ -43,12 +44,24 @@ export class Gameplay extends GameState {
     this.fpsText.position.set(10, 10)
     this.fpsText.style.fill = 'white'
 
-    this.stage.addChild(this.receptor, this.fpsText, new NoteObject().sprite)
+    this.stage.addChild(this.receptor, this.notes, this.fpsText)
+
+    this.notes.addChild(
+      new NoteObject().sprite,
+      new NoteObject().sprite,
+      new NoteObject().sprite,
+      new NoteObject().sprite,
+      new NoteObject().sprite
+    )
   }
 
   update(dt: number) {
     this.songTime += dt
 
     this.fpsText.text = this.game.app.ticker.FPS.toFixed()
+
+    for (const note of this.notes.children) {
+      note.position.y += 100 * dt
+    }
   }
 }
