@@ -75,13 +75,14 @@ export class Gameplay extends GameState {
   }
 
   touchstart(event: pixi.interaction.InteractionEvent) {
-    for (const note of this.notes) {
+    const tapped = this.notes.find(note => {
       const touchDistance = Math.abs(note.sprite.position.x - event.data.global.x)
       const touchTiming = Math.abs(note.time - this.songTime)
-      if (touchDistance < 50 && touchTiming < 0.2) {
-        note.sprite.visible = false
-        break
-      }
+      return touchDistance < 50 && touchTiming < 0.2
+    })
+
+    if (tapped) {
+      tapped.sprite.visible = false
     }
   }
 }
