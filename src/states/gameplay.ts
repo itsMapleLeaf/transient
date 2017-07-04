@@ -33,6 +33,7 @@ class Note {
 
 export class Gameplay extends GameState {
   songTime = -2
+  notes = [] as Note[]
   playing = false
 
   noteContainer = new pixi.Container()
@@ -54,13 +55,15 @@ export class Gameplay extends GameState {
     this.fpsText.position.set(10, 10)
     this.fpsText.style.fill = 'white'
 
-    this.noteContainer.addChild(
-      new Note(0 / 2, 0 / 4).sprite,
-      new Note(1 / 2, 1 / 4).sprite,
-      new Note(2 / 2, 2 / 4).sprite,
-      new Note(3 / 2, 3 / 4).sprite,
-      new Note(4 / 2, 4 / 4).sprite
+    this.notes.push(
+      new Note(0 / 10, 0.5),
+      new Note(1 / 10, 0.5),
+      new Note(2 / 10, 0.5),
+      new Note(3 / 10, 0.5),
+      new Note(4 / 10, 0.5)
     )
+
+    this.notes.forEach(note => this.noteContainer.addChild(note.sprite))
 
     this.stage.addChild(this.receptor, this.noteContainer, this.fpsText)
   }
@@ -69,5 +72,16 @@ export class Gameplay extends GameState {
     this.songTime += dt
     this.noteContainer.y = this.receptor.y + this.songTime * trackScale
     this.fpsText.text = this.game.app.ticker.FPS.toFixed()
+  }
+
+  touchstart(event: pixi.interaction.InteractionEvent) {
+    for (const note of this.notes) {
+      const touchDistance = Math.abs(note.sprite.position.x - event.data.global.x)
+      const touchTiming = Math.abs(note.time - this.songTime)
+      if (touchDistance < 50 && touchTiming < 0.2) {
+        note.sprite.visible = false
+        break
+      }
+    }
   }
 }
