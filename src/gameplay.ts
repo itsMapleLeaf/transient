@@ -44,9 +44,7 @@ export class Gameplay extends GameState {
     this.fpsText.position.set(10, 10)
     this.fpsText.style.fill = 'white'
 
-    this.stage.addChild(this.receptor)
-    this.stage.addChild(this.fpsText)
-    this.stage.addChild(new NoteObject().sprite)
+    this.stage.addChild(this.receptor, this.fpsText, new NoteObject().sprite)
   }
 
   update(dt: number) {
