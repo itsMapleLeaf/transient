@@ -23,7 +23,7 @@ class NoteObject {
 }
 
 export class Gameplay extends GameState {
-  notes = new pixi.Container()
+  noteContainer = new pixi.Container()
   receptor = createRectObject(viewWidth, 10)
   fpsText = new pixi.Text('0')
   songTime = 0
@@ -44,9 +44,9 @@ export class Gameplay extends GameState {
     this.fpsText.position.set(10, 10)
     this.fpsText.style.fill = 'white'
 
-    this.stage.addChild(this.receptor, this.notes, this.fpsText)
+    this.stage.addChild(this.receptor, this.noteContainer, this.fpsText)
 
-    this.notes.addChild(
+    this.noteContainer.addChild(
       new NoteObject().sprite,
       new NoteObject().sprite,
       new NoteObject().sprite,
@@ -60,7 +60,7 @@ export class Gameplay extends GameState {
 
     this.fpsText.text = this.game.app.ticker.FPS.toFixed()
 
-    for (const note of this.notes.children) {
+    for (const note of this.noteContainer.children) {
       note.position.y += 100 * dt
     }
   }
