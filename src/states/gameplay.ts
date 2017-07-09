@@ -29,6 +29,10 @@ class Note {
     this.sprite.pivot.set(this.sprite.width / 2, this.sprite.height / 2)
     this.sprite.rotation += degreesToRadians(45)
   }
+
+  playTapAnimation() {
+    this.sprite.visible = false
+  }
 }
 
 export class Gameplay extends GameState {
@@ -75,14 +79,17 @@ export class Gameplay extends GameState {
   }
 
   touchstart(event: pixi.interaction.InteractionEvent) {
-    const tapped = this.notes.find(note => {
-      const touchDistance = Math.abs(note.sprite.position.x - event.data.global.x)
+    const note = this.findTappedNote(event.data.global)
+    if (note) {
+      note.playTapAnimation()
+    }
+  }
+
+  findTappedNote(touch: { x: number }) {
+    return this.notes.find(note => {
+      const touchDistance = Math.abs(note.sprite.position.x - touch.x)
       const touchTiming = Math.abs(note.time - this.songTime)
       return touchDistance < 50 && touchTiming < 0.2
     })
-
-    if (tapped) {
-      tapped.sprite.visible = false
-    }
   }
 }
