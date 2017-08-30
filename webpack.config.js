@@ -31,6 +31,6 @@ module.exports = {
   performance: {
     hints: false,
   },
-  plugins: [new HTMLPlugin({ template: './index.html' })],
+  plugins: [new HTMLPlugin({ template: './index.html' }), new webpack.NamedModulesPlugin()],
   devtool: '#source-map',
 }
