@@ -1,13 +1,8 @@
 {
-  "defaultSeverity": "warn",
+  "defaultSeverity": "warning",
   "extends": [],
   "rules": {
-    "semicolon": [
-      true,
-      "never"
-    ],
-    "ordered-imports": [
-      true
-    ]
+    "semicolon": [true, "never"],
+    "ordered-imports": [true]
   }
 }
