@@ -1,13 +1,16 @@
 import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
 import { receptorPosition, trackScale, viewWidth } from '../constants'
+import { JudgementAnimation } from '../entities/judgement'
 import { NoteEntity, NoteExplosion } from '../entities/note'
 import { GameState } from '../game'
+import { judgeTiming } from '../judgement'
 import { createRectObject } from '../util/pixi'
 
 export class Gameplay extends GameState {
   songTime = -2
   notes = [] as NoteEntity[]
+  judgement = new JudgementAnimation(this.app.ticker)
   playing = false
 
   noteContainer = new pixi.Container()
@@ -39,7 +42,7 @@ export class Gameplay extends GameState {
 
     this.notes.forEach(note => this.noteContainer.addChild(note.sprite))
 
-    this.stage.addChild(this.receptor, this.noteContainer, this.fpsText)
+    this.stage.addChild(this.receptor, this.noteContainer, this.fpsText, this.judgement.sprite)
   }
 
   update(dt: number) {
@@ -51,10 +54,7 @@ export class Gameplay extends GameState {
   touchstart(event: pixi.interaction.InteractionEvent) {
     const note = this.findTappedNote(event.data.global)
     if (note) {
-      const global = note.sprite.getGlobalPosition()
-      const explosion = new NoteExplosion(global.x, receptorPosition, this.app.ticker)
-      this.stage.addChild(explosion.sprite)
-      note.hide()
+      this.handleTappedNote(note)
     }
   }
 
@@ -64,5 +64,16 @@ export class Gameplay extends GameState {
       const touchTiming = Math.abs(note.time - this.songTime)
       return touchDistance < 50 && touchTiming < 0.2
     })
+  }
+
+  handleTappedNote(note: NoteEntity) {
+    note.hide()
+
+    const global = note.sprite.getGlobalPosition()
+    const explosion = new NoteExplosion(global.x, receptorPosition, this.app.ticker)
+    this.stage.addChild(explosion.sprite)
+
+    const judgement = judgeTiming(Math.abs(note.time - this.songTime))
+    this.judgement.play(judgement)
   }
 }

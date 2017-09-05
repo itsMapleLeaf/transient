@@ -6,7 +6,7 @@ import { Gameplay } from './states/gameplay'
 function init() {
   webfontloader.load({
     google: {
-      families: ['Exo'],
+      families: ['Teko'],
     },
     active: runGame,
   })
