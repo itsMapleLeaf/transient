@@ -4,7 +4,7 @@ import { receptorPosition, trackScale, viewWidth } from '../constants'
 import { JudgementAnimation } from '../entities/judgement'
 import { NoteEntity, NoteExplosion } from '../entities/note'
 import { GameState } from '../game'
-import { Judgement, judgeTiming, miss } from '../judgement'
+import { Judgement, judgeTiming } from '../judgement'
 import { createRectObject } from '../util/pixi'
 
 export class Gameplay extends GameState {
@@ -56,7 +56,7 @@ export class Gameplay extends GameState {
       const touchDistance = Math.abs(note.sprite.position.x - event.data.global.x)
       const touchTiming = Math.abs(note.time - this.songTime)
       const judgement = judgeTiming(touchTiming)
-      if (touchDistance < 50 && judgement !== miss) {
+      if (touchDistance < 50 && judgement != null) {
         this.handleTappedNote(note, judgement)
       }
     }

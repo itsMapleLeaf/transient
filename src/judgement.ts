@@ -11,5 +11,4 @@ export function judgeTiming(timing: number) {
   if (timing <= absolute.timingWindow) return absolute
   if (timing <= great.timingWindow) return great
   if (timing <= ok.timingWindow) return ok
-  return miss
 }
