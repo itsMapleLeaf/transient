@@ -1,43 +1,13 @@
 import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
-import { viewHeight, viewWidth } from '../constants'
+import { receptorPosition, trackScale, viewWidth } from '../constants'
+import { NoteEntity } from '../entities/note'
 import { GameState } from '../game'
-import { degreesToRadians, lerp } from '../lib/util'
-
-/** The vertical position of the receptor */
-const receptorPosition = viewHeight * 0.875
-
-/** The number of pixels per second between notes */
-const trackScale = 300
-
-/** Creates a rectangle pixi Graphics object with the given dimensions */
-function createRectObject(width: number, height: number) {
-  const sprite = new pixi.Graphics()
-  sprite.beginFill(0xffffff)
-  sprite.drawRect(0, 0, width, height)
-  sprite.endFill()
-  return sprite
-}
-
-class Note {
-  sprite = createRectObject(70, 70)
-
-  constructor(public time: number, public position: number) {
-    const x = lerp(100, viewWidth - 100, position)
-    const y = -trackScale * time
-    this.sprite.position.set(x, y)
-    this.sprite.pivot.set(this.sprite.width / 2, this.sprite.height / 2)
-    this.sprite.rotation += degreesToRadians(45)
-  }
-
-  playTapAnimation() {
-    this.sprite.visible = false
-  }
-}
+import { createRectObject } from '../util/pixi'
 
 export class Gameplay extends GameState {
   songTime = -2
-  notes = [] as Note[]
+  notes = [] as NoteEntity[]
   playing = false
 
   noteContainer = new pixi.Container()
@@ -60,11 +30,11 @@ export class Gameplay extends GameState {
     this.fpsText.style.fill = 'white'
 
     this.notes.push(
-      new Note(0 / 2, Math.random()),
-      new Note(1 / 2, Math.random()),
-      new Note(2 / 2, Math.random()),
-      new Note(3 / 2, Math.random()),
-      new Note(4 / 2, Math.random()),
+      new NoteEntity(0 / 2, Math.random()),
+      new NoteEntity(1 / 2, Math.random()),
+      new NoteEntity(2 / 2, Math.random()),
+      new NoteEntity(3 / 2, Math.random()),
+      new NoteEntity(4 / 2, Math.random()),
     )
 
     this.notes.forEach(note => this.noteContainer.addChild(note.sprite))

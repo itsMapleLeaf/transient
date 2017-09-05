@@ -1,7 +1,3 @@
-export function animationFrame() {
-  return new Promise<number>(requestAnimationFrame)
-}
-
 export function lerp(a: number, b: number, delta: number) {
   return a + (b - a) * delta
 }
