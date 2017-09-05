@@ -22,7 +22,7 @@ export class NoteEntity {
   }
 }
 
-export class NoteExplosionEntity {
+export class NoteExplosion {
   sprite = new pixi.Container()
   time = 0
 
