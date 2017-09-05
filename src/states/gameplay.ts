@@ -4,7 +4,7 @@ import { receptorPosition, trackScale, viewWidth } from '../constants'
 import { JudgementAnimation } from '../entities/judgement'
 import { NoteEntity, NoteExplosion } from '../entities/note'
 import { GameState } from '../game'
-import { judgeTiming } from '../judgement'
+import { Judgement, judgeTiming, miss } from '../judgement'
 import { createRectObject } from '../util/pixi'
 
 export class Gameplay extends GameState {
@@ -52,28 +52,23 @@ export class Gameplay extends GameState {
   }
 
   touchstart(event: pixi.interaction.InteractionEvent) {
-    const note = this.findTappedNote(event.data.global)
-    if (note) {
-      this.handleTappedNote(note)
+    for (const note of this.notes) {
+      const touchDistance = Math.abs(note.sprite.position.x - event.data.global.x)
+      const touchTiming = Math.abs(note.time - this.songTime)
+      const judgement = judgeTiming(touchTiming)
+      if (touchDistance < 50 && judgement !== miss) {
+        this.handleTappedNote(note, judgement)
+      }
     }
   }
 
-  findTappedNote(touch: { x: number }) {
-    return this.notes.find(note => {
-      const touchDistance = Math.abs(note.sprite.position.x - touch.x)
-      const touchTiming = Math.abs(note.time - this.songTime)
-      return touchDistance < 50 && touchTiming < 0.2
-    })
-  }
-
-  handleTappedNote(note: NoteEntity) {
+  handleTappedNote(note: NoteEntity, judgement: Judgement) {
     note.hide()
 
     const global = note.sprite.getGlobalPosition()
     const explosion = new NoteExplosion(global.x, receptorPosition, this.app.ticker)
     this.stage.addChild(explosion.sprite)
 
-    const judgement = judgeTiming(Math.abs(note.time - this.songTime))
     this.judgement.play(judgement)
   }
 }
