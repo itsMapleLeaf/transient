@@ -60,11 +60,11 @@ export class Gameplay extends GameState {
     this.fpsText.style.fill = 'white'
 
     this.notes.push(
-      new Note(0 / 10, 0.5),
-      new Note(1 / 10, 0.5),
-      new Note(2 / 10, 0.5),
-      new Note(3 / 10, 0.5),
-      new Note(4 / 10, 0.5)
+      new Note(0 / 2, Math.random()),
+      new Note(1 / 2, Math.random()),
+      new Note(2 / 2, Math.random()),
+      new Note(3 / 2, Math.random()),
+      new Note(4 / 2, Math.random()),
     )
 
     this.notes.forEach(note => this.noteContainer.addChild(note.sprite))
