@@ -17,7 +17,7 @@ export class NoteEntity {
     this.sprite.rotation += degreesToRadians(45)
   }
 
-  playTapAnimation() {
+  hide() {
     this.sprite.visible = false
   }
 }

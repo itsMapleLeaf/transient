@@ -51,11 +51,10 @@ export class Gameplay extends GameState {
   touchstart(event: pixi.interaction.InteractionEvent) {
     const note = this.findTappedNote(event.data.global)
     if (note) {
-      note.playTapAnimation()
-
       const global = note.sprite.getGlobalPosition()
       const explosion = new NoteExplosion(global.x, receptorPosition, this.app.ticker)
       this.stage.addChild(explosion.sprite)
+      note.hide()
     }
   }
 
