@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 
 const root = path.resolve(__dirname, '..')
+const production = process.env.NODE_ENV === 'production'
 
 const config: webpack.Configuration = {
   entry: {
@@ -36,13 +37,17 @@ const config: webpack.Configuration = {
   performance: {
     hints: false,
   },
-  plugins: [
-    new HTMLPlugin({ template: path.resolve(root, 'index.html') }),
-    new webpack.NamedModulesPlugin(),
+  plugins: [new HTMLPlugin({ template: path.resolve(root, 'index.html') })],
+  devtool: '#source-map',
+}
+
+if (production) {
+  config.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({ names: ['lib'] }),
-  ],
-  devtool: '#source-map',
+  )
+} else {
+  config.plugins.push(new webpack.NamedModulesPlugin())
 }
 
 export default config
