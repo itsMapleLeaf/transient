@@ -5,18 +5,19 @@
   "author": "just nobody",
   "license": "MIT",
   "scripts": {
-    "start":
-      "webpack-dev-server --config ./webpack/webpack.config.ts --inline --hot --progress --open",
+    "start": "webpack-dev-server --config ./webpack/webpack.config.ts --inline --hot --progress --open",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.config.ts -p",
     "build-dev": "webpack --config ./webpack/webpack.config.ts"
   },
   "dependencies": {
     "howler": "^2.0.4",
-    "pixi.js": "^4.5.5"
+    "pixi.js": "^4.5.5",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@types/howler": "^2.0.3",
     "@types/pixi.js": "^4.5.3",
+    "@types/webfontloader": "^1.6.29",
     "@types/webpack": "^3.0.10",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
