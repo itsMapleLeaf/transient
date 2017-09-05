@@ -1,7 +1,7 @@
 import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
 import { receptorPosition, trackScale, viewWidth } from '../constants'
-import { NoteEntity } from '../entities/note'
+import { NoteEntity, NoteExplosionEntity } from '../entities/note'
 import { GameState } from '../game'
 import { createRectObject } from '../util/pixi'
 
@@ -52,6 +52,10 @@ export class Gameplay extends GameState {
     const note = this.findTappedNote(event.data.global)
     if (note) {
       note.playTapAnimation()
+
+      const global = note.sprite.getGlobalPosition()
+      const explosion = new NoteExplosionEntity(global.x, receptorPosition, this.app.ticker)
+      this.stage.addChild(explosion.sprite)
     }
   }
 
