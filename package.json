@@ -5,7 +5,8 @@
   "author": "just nobody",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack/webpack.config.ts --inline --hot --progress --open",
+    "start":
+      "webpack-dev-server --config ./webpack/webpack.config.ts --inline --hot --progress --open",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.config.ts -p",
     "build-dev": "webpack --config ./webpack/webpack.config.ts"
   },
