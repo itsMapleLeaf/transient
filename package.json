@@ -5,8 +5,10 @@
   "author": "just nobody",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --progress --open",
-    "build": "webpack -p"
+    "start":
+      "webpack-dev-server --config ./webpack/webpack.config.ts --inline --hot --progress --open",
+    "build": "webpack --config ./webpack/webpack.config.ts -p",
+    "build-dev": "webpack --config ./webpack/webpack.config.ts"
   },
   "dependencies": {
     "howler": "^2.0.4",
@@ -19,6 +21,7 @@
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.28.0",
     "ts-loader": "^2.2.0",
+    "ts-node": "^3.3.0",
     "tslint": "^5.4.3",
     "typescript": "^2.4.0",
     "webpack": "^3.0.0",
