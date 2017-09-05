@@ -1,10 +1,10 @@
 import { Howl } from 'howler'
 import * as pixi from 'pixi.js'
 import { receptorPosition, trackScale, viewWidth } from '../constants'
-import { JudgementAnimation } from '../entities/judgement'
-import { NoteEntity, NoteExplosion } from '../entities/note'
 import { GameState } from '../game'
-import { Judgement, judgeTiming } from '../judgement'
+import { Judgement, judgeTiming } from '../judgement/judgement'
+import { JudgementAnimation } from '../judgement/judgement-animation'
+import { NoteEntity, NoteExplosion } from '../note/note'
 import { createRectObject } from '../util/pixi'
 
 export class Gameplay extends GameState {

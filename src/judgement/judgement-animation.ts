@@ -1,7 +1,7 @@
 import * as pixi from 'pixi.js'
 import { viewHeight, viewWidth } from '../constants'
-import { Judgement } from '../judgement'
 import { lerpClamped } from '../util/math'
+import { Judgement } from './judgement'
 
 export class JudgementAnimation {
   text = new pixi.Text('', {
