@@ -1,6 +1,7 @@
 import * as webfontloader from 'webfontloader'
 import { Game } from './game'
 import { Gameplay } from './states/gameplay'
+import { query } from './util/dom'
 // import { MainMenu } from './states/main-menu'
 
 function init() {
@@ -16,10 +17,7 @@ function runGame() {
   const game = new Game()
   game.setState(new Gameplay(game))
   game.run()
-
-  const viewRoot = document.querySelector('#game')
-  if (!viewRoot) throw new Error('View root not found')
-  viewRoot.appendChild(game.app.view)
+  query('#game').appendChild(game.app.view)
 }
 
 init()
