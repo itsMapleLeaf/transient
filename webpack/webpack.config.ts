@@ -5,10 +5,13 @@ import * as webpack from 'webpack'
 const root = path.resolve(__dirname, '..')
 
 const config: webpack.Configuration = {
-  entry: path.resolve(root, 'src/main'),
+  entry: {
+    app: path.resolve(root, 'src/main'),
+    lib: ['pixi.js', 'howler'],
+  },
   output: {
     path: path.resolve(root, 'build'),
-    filename: 'build.js',
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -36,6 +39,8 @@ const config: webpack.Configuration = {
   plugins: [
     new HTMLPlugin({ template: path.resolve(root, 'index.html') }),
     new webpack.NamedModulesPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({ names: ['lib'] }),
   ],
   devtool: '#source-map',
 }
